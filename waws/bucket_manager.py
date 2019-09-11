@@ -6,6 +6,7 @@
 ##########################
 import os
 import subprocess
+import boto3
 
 # local imports
 from . import utils

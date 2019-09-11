@@ -6,6 +6,7 @@
 ##########################
 import os
 import subprocess
+import boto3
 
 # local imports
 from . import utils
@@ -118,7 +119,7 @@ class InstanceManager(object):
 
     def get_dns(self,instance_name):
         """ Gets the dns of a running instance. """
-        instances =
+        instances = self.get_instances()
         for instance in self.instances:
             if instance['name']==instance_name:
                 return instance['dns']
