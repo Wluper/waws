@@ -1,0 +1,336 @@
+#!/usr/bin/python3
+
+##########################
+# Import
+##########################
+import boto3
+import argparse
+import sys
+import hashlib
+import subprocess
+import os
+import json
+import pkg_resources
+import shutil
+
+# Local
+import waws
+
+
+##########################
+# Code
+##########################
+DEFAULT_DOCKER = "AWESOME_DOCKER"
+
+
+##########################
+# Code
+##########################
+parser = argparse.ArgumentParser(
+    description="""Copyright (C) Wluper 2019-Present\n A minimal library for AWS EC2/S3"""
+)
+
+
+#############
+# PARAMETERS
+parser.add_argument(
+    "--instance",
+    "-i",
+    action="store",
+    type=str,
+    default="",
+    help="The name of the EC2 instance to use.",
+)
+parser.add_argument(
+    "--bucket",
+    "-b",
+    action="store",
+    type=str,
+    default="",
+    help="The name of the S3 bucket to use.",
+)
+parser.add_argument(
+    "--file_name",
+    "-f",
+    action="store",
+    type=str,
+    default="",
+    help="The name of the file or folder.",
+)
+parser.add_argument(
+    "--remote_path", "-r", action="store", type=str, default="", help="The remote path."
+)
+parser.add_argument(
+    "--local_path", "-l", action="store", type=str, default="", help="The local path."
+)
+
+
+#############
+# Local Commands
+parser.add_argument(
+    "--configure",
+    action="store_true",
+    default=False,
+    help="Configures the package. Run this when first installing.\n[Required Params: None]\n[Optional Params: None]",
+)
+parser.add_argument(
+    "--version", action="store_true", default=False, help="Prints package version.\n[Required Params: None]\n[Optional Params: None]"
+)
+
+
+#############
+# S3 Commands
+parser.add_argument(
+    "--uploadS3",
+    action="store_true",
+    default=False,
+    help="Uploads file from local at local_path or './' to an EC2 instance at remote_path or '~'.\n[Required Params: -i -f]\n[Optional Params: -l -r]"
+)
+parser.add_argument(
+    "--downloadS3",
+    action="store_true",
+    default=False,
+    help="Downloads file from an EC2 instance at remote_path or '~' to local_path or './'.\n[Required Params: -i -f]\n[Optional Params: -l -r]"
+)
+
+
+#############
+# EC2 Commands
+parser.add_argument(
+    "--list", action="store_true", default=False, help="Lists all available EC2 instances and status.\n[Required Params: None]\n[Optional Params: None]"
+)
+parser.add_argument(
+    "--uploadEC2",
+    action="store_true",
+    default=False,
+    help="Uploads file or folder from local at local_path or './' to an EC2 instance at remote_path or '~'.\n[Required Params: -i -f]\n[Optional Params: -l -r]",
+)
+parser.add_argument(
+    "--downloadEC2",
+    action="store_true",
+    default=False,
+    help="Downloads file or folder from an EC2 instance at remote_path or '~' to local_path or './'.\n[Required Params: -i -f]\n[Optional Params: -l -r]",
+)
+parser.add_argument(
+    "--connect",
+    action="store_true",
+    default=False,
+    help="Connects to an EC2 instance\n[Required Params: -i]\n[Optional Params: None]",
+)
+parser.add_argument(
+    "--start",
+    action="store_true",
+    default=False,
+    help="Starts an EC2 instance.\n[Required Params: -i]\n[Optional Params: None]",
+)
+parser.add_argument(
+    "--stop",
+    action="store_true",
+    default=False,
+    help="Stops an EC2 instance.\n[Required Params: -i]\n[Optional Params: None]",
+)
+
+
+##########################
+# DOCKER RELATED COMMANDS
+parser.add_argument(
+    "--docker_start",
+    action="store_true",
+    default=False,
+    help="Starts the default container.\nIf instance was rebooted, you need to run this.\n If instance was running already you probably need to run --docker_attach.\n[Required Params: None]\n[Optional Params: None]",
+)
+parser.add_argument(
+    "--docker_attach",
+    action="store_true",
+    default=False,
+    help="Attaches the default container. If instance was rebooted you probably need to run --docker_start.\n[Required Params: None]\n[Optional Params: None]",
+)
+parser.add_argument(
+    "--docker_uploadEC2",
+    action="store_true",
+    default=False,
+    help="Uploads to the home directory of default Docker.\n[Required Params: -i -f]\n[Optional Params: -l -r]",
+)
+parser.add_argument(
+    "--docker_downloadEC2",
+    action="store_true",
+    default=False,
+    help="Downloads from the home directory of the default Docker.\n[Required Params: -i -f]\n[Optional Params: -l -r]",
+)
+
+
+##########################
+# Execution
+##########################
+args = parser.parse_args()
+
+
+#############
+# Local Commands
+if args.configure:
+    try:
+        waws.utils.configure()
+    except Exception as e:
+        print(e)
+        print("Configuring did not work. Please report on Github.")
+
+if args.version:
+    try:
+        print(pkg_resources.get_distribution("waws").version)
+    except Exception as e:
+        print(e)
+        print("Python Version and pkg_resource seem to be not working.")
+
+#############
+# S3 Commands
+if args.uploadS3:
+    s3 = waws.BucketManager()
+    try:
+        s3.upload_file(
+            bucket_name=args.bucket,
+            folder_name=args.file_name,
+            local_path=args.local_path,
+        )
+
+    except Exception as e:
+        print(e)
+        print("Upload to S3 failed. Please check all parameters are correct. Otherwise, please report on Github.")
+
+if args.downloadS3:
+    s3 = waws.BucketManager()
+    try:
+        s3.download_file(
+            bucket_name=args.bucket,
+            folder_name=args.file_name,
+            local_path=args.local_path,
+        )
+
+    except Exception as e:
+        print(e)
+        print("Download to S3 failed. Please check all parameters are correct. Otherwise, please report on Github.")
+
+
+#############
+# EC2 Commands
+if args.list:
+    ec2 = waws.InstanceManager()
+    try:
+        print(
+            "Running Instance List: {}".format(
+                json.dumps(ec2.get_instances(), indent=4, sort_keys=True)
+            )
+        )
+    except Exception as e:
+        print(e)
+        print("Listing available EC2 instances did not work. Please report on Github.")
+
+if args.connect:
+    try:
+        w = waws.InstanceManager()
+        w.connect_to_EC2(instance=args.instance)
+    except Exception as e:
+        print(e)
+        print("connecting to the EC2 instance failed. Please check all parameters are correct. Otherwise, please report on Github.")
+
+if args.start:
+    try:
+        ec2 = waws.InstanceManager()
+        flag = ec2.start_instance(args.instance)
+        if not flag:
+            print("Starting the Instance failed")
+    except Exception as e:
+        print(e)
+        print("Starting EC2 instance did not work. Please check all parameters are correct. Otherwise, please report on Github.")
+
+if args.stop:
+    try:
+        ec2 = waws.InstanceManager()
+        ec2.stop_instance(args.instance)
+    except Exception as e:
+        print(e)
+        print("Stopping EC2 instance did not work. Please check all parameters are correct. Otherwise, please report on Github.")
+
+if args.uploadEC2:
+    try:
+        w = waws.InstanceManager()
+        w.upload_to_EC2(
+            instance=args.instance,
+            folder_file_name=args.file_name,
+            local_path=args.local_path,
+            optional_remote_path=args.remote_path,
+        )
+    except Exception as e:
+        print(e)
+        print("Uploading to EC2 instance failed. Please check all parameters are correct. Otherwise, please report on Github.")
+
+
+if args.downloadEC2:
+    try:
+        w = waws.InstanceManager()
+        w.download_from_EC2(
+            instance=args.instance,
+            folder_file_name=args.file_name,
+            local_path=args.local_path,
+            optional_remote_path=args.remote_path,
+        )
+    except Exception as e:
+        print(e)
+        print("Download to EC2 instance failed. Please check all parameters are correct. Otherwise, please report on Github.")
+
+
+#############
+# Local Commands
+if args.docker_start:
+    try:
+        command = ["docker", "container", "start", DEFAULT_DOCKER]
+        command = (" ").join(command).strip(" ")  # necessary for shell = True
+        subprocess.run(command, shell=True)
+
+        command = ["docker", "container", "attach", DEFAULT_DOCKER]
+        command = (" ").join(command).strip(" ")  # necessary for shell = True
+        subprocess.run(command, shell=True)
+
+    except Exception as e:
+        print(e)
+        print("Starting default docker container failed. Maybe container is started already, try --docker_attach. Otherwise, please report on Github.")
+
+
+if args.docker_attach:
+    try:
+        command = ["docker", "container", "attach", DEFAULT_DOCKER]
+        command = (" ").join(command).strip(" ")  # necessary for shell = True
+        subprocess.run(command, shell=True)
+
+    except Exception as e:
+        print(e)
+        print("Attaching default container failed. Did you reboot the instance, try --docker_start. Otherwise, please report on Github.")
+
+if args.docker_uploadEC2:
+    try:
+        w = waws.InstanceManager()
+        w.upload_to_EC2(
+            instance=args.instance,
+            folder_file_name=args.file_name,
+            local_path=args.local_path,
+            optional_remote_path="../Docker/" + args.remote_path,
+        )
+
+    except Exception as e:
+        print(e)
+        print("Uploading to EC2 instance failed. Please check all parameters are correct. Otherwise, please report on Github.")
+
+if args.docker_downloadEC2:
+    try:
+        w = waws.InstanceManager()
+        w.download_from_EC2(
+            instance=args.instance,
+            folder_file_name=args.file_name,
+            local_path=args.local_path,
+            optional_remote_path="../Docker/" + args.remote_path,
+        )
+
+    except Exception as e:
+        print(e)
+        print("Downloading from EC2 instance failed. Please check all parameters are correct. Otherwise, please report on Github.")
+
+# EOF
