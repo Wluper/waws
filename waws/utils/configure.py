@@ -17,11 +17,11 @@ CONFIG_TEMPLATE = {
     "AWS_REGION": "eu-london-1",
     "AWS_ENCODING": "json",
     "AWS_KEY_ID": "",
-    "AWS_KEY": "",
+    "AWS_KEY": ""
 }
 
 HOME_DIRECTORY = os.path.expanduser("~")
-CONFIG_DIRECTORY_NAME = ".aws"
+CONFIG_DIRECTORY_NAME = ".waws"
 CONFIG_DIRECTORY_PATH = os.path.join(HOME_DIRECTORY, CONFIG_DIRECTORY_NAME)
 CONFIG_FILE_NAME = "config"
 CONFIG_FILE_PATH = os.path.join(CONFIG_DIRECTORY_PATH, CONFIG_FILE_NAME)
