@@ -120,7 +120,7 @@ class InstanceManager(object):
     def get_dns(self,instance_name):
         """ Gets the dns of a running instance. """
         instances = self.get_instances()
-        for instance in self.instances:
+        for instance in instances:
             if instance['name']==instance_name:
                 return instance['dns']
         return False
@@ -140,8 +140,8 @@ class InstanceManager(object):
                     }
                 ]
         """
-        outList  = []
-        tempDict = {
+        out_list  = []
+        temp_dict = {
             'name'  : '',
             'dns'   : '',
             'state' : ''
@@ -157,7 +157,7 @@ class InstanceManager(object):
             # appending to list
             out_list.append(out_dict)
 
-        return outList
+        return out_list
 
     def get_tag(self,tags,key):
         """ Get's the correct Tag Value from the instance.tag dict. """
@@ -182,7 +182,6 @@ class InstanceManager(object):
 
                 # if not running
                 if temp.state['Name']=='running':
-                    self.instances = self.get_instances()
                     return instance['dns']
 
                 # if not running
@@ -198,7 +197,6 @@ class InstanceManager(object):
                         return False
                 # instance started exiting
                 print ('...instance is finally:%s' % temp.state['Name'] )
-                self.instances = self.get_instances()
                 return self.get_dns(name)
 
         return False
