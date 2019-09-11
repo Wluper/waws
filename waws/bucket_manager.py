@@ -22,7 +22,7 @@ DEFAULT_BUCKET = "wluper-retrograph"
 # Code
 ##########################
 class BucketManager(object):
-    """ Main EC2 Instance Manager. """
+    """ Main S3 Bucket Manager. """
 
 
     def __init__(self):
@@ -65,7 +65,7 @@ class BucketManager(object):
         remote_path,
         bucket_name=DEFAULT_BUCKET
         ):
-        """ Uploads object to S3. """
+        """ Downloads object from S3. """
         bucket = self.__s3.Bucket(bucket_name)
         final_local_path = os.path.join(local_path,file_name)
         final_remote_path = remote_path + '/' + file_name
