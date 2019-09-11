@@ -4,4 +4,4 @@
 ##########################
 # Import
 ##########################
-from .configure import configure
+from .configure import configure, get_config
