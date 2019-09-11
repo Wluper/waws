@@ -13,7 +13,7 @@ pip3 install waws
 After the installation you need to configure:
 
 ```bash
-waws --configure
+w_aws --configure
 ```
 
 
