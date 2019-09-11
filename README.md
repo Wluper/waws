@@ -62,31 +62,31 @@ inst.download_from_EC2(folder_file_name="CODE_FOLDER", local_path="./training", 
 
 ### Useful Help:
 ```bash
-waws --help
+w_aws --help
 ```
 
 ### Useful functions:
 ```bash
-waws --start -i flower-power-1
+w_aws --start -i flower-power-1
 
-waws --connect -i flower-power-1
+w_aws --connect -i flower-power-1
 
-waws --list
+w_aws --list
 
-waws --docker_uploadEC2 -i flower-power-1 -f FOLDER -l LOCALPATH
+w_aws --docker_uploadEC2 -i flower-power-1 -f FOLDER -l LOCALPATH
 
-waws --docker_downloadEC2 -i flower-power-1 -f FOLDER -l LOCALPATH
+w_aws --docker_downloadEC2 -i flower-power-1 -f FOLDER -l LOCALPATH
 
-waws --docker_attach
+w_aws --docker_attach
 
-waws --docker_attach
+w_aws --docker_attach
 
-waws --docker_list
+w_aws --docker_list
 ```
 
 ### General parameters:
 ```bash
-waws -i INSTANCE_NAME -f FILE_NAME  -l LOCAL_PATH  -r REMOTE_PATH  -b BUCKET_NAME
+w_aws -i INSTANCE_NAME -f FILE_NAME  -l LOCAL_PATH  -r REMOTE_PATH  -b BUCKET_NAME
 ```
 
 <!-- EOF -->
