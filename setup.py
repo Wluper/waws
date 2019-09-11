@@ -15,7 +15,7 @@ setup(
       description   ='Minimal AWS EC2/S3 wrapper by Wluper',
       url           ='https://github.com/Wluper/waws',
       author        ='Nikolai Rozanov',
-      author_email  ='nikolai.rozanov@gmail.com',
+      author_email  ='nikolai@wluper.com',
       license       ='GPL 2.0',
     #
     # Actual packages, data and scripts
