@@ -23,13 +23,13 @@ setup(
 
       packages      =find_packages(),
       scripts       =[
-                        'bin/waws',
+                        'bin/w_aws'
                     ],
     #
     # Requirements
     #
       install_requires=[
-                        'aws-cli',
+                        'awscli',
                         'boto3',
                         'tqdm'
                         ]
