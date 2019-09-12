@@ -18,8 +18,8 @@ from . import utils
 class InstanceManager(object):
     """ Main EC2 Instance Manager. """
     _instance_mapping = {
-        'flower-power-1' : 'wluper-external-1',
-        'flower-power-2' : 'wluper-external-2',
+        'flower-power-1' : 'sunshine-1',
+        'flower-power-2' : 'sunshine-2',
     }
 
     def __init__(self):

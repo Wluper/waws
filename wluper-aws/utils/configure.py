@@ -13,7 +13,7 @@ from enum import Enum
 ##########################
 CONFIG_TEMPLATE = {
     "KEY_PATH": os.path.expanduser("~/.ssh/wluper"),
-    "USER": "",
+    "USER": "Firstname",
     "AWS_REGION": "eu-west-2",
     "AWS_ENCODING": "json",
     "AWS_KEY_ID": "",
