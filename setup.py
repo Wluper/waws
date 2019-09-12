@@ -10,8 +10,8 @@ setup(
     #
     # SETUP
     #
-      name          ='waws',
-      version       ='0.0.0.2',
+      name          ='wluper-aws',
+      version       ='0.0.0.1',
       description   ='Minimal AWS EC2/S3 wrapper by Wluper',
       url           ='https://github.com/Wluper/waws',
       author        ='Nikolai Rozanov',
@@ -23,7 +23,7 @@ setup(
 
       packages      =find_packages(),
       scripts       =[
-                        'bin/w_aws'
+                        'bin/waws'
                     ],
     #
     # Requirements
