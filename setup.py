@@ -30,6 +30,5 @@ setup(
     #
       install_requires=[
                         'boto3',
-                        'tqdm'
                         ]
       )
