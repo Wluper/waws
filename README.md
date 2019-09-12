@@ -5,7 +5,7 @@ This is a minimal library for handling EC2 instances and uploading and downloadi
 ## Installation
 
 ```bash
-pip3 install waws
+pip3 install wluper-aws
 ```
 
 ### CONFIGURATION
@@ -62,36 +62,36 @@ inst.download_from_EC2(folder_file_name="CODE_FOLDER", local_path="./training", 
 
 ### Useful Help:
 ```bash
-w_aws --help
+waws --help
 ```
 
 ### Useful functions:
 ```bash
 # Todo with S3
-w_aws --uploadS3 -b wluper-retrograph -f FILE -l LOCALPATH
+waws --uploadS3 -b wluper-retrograph -f FILE -l LOCALPATH
 
-w_aws --downloadS3 -b wluper-retrograph -f FILE -l LOCALPATH
+waws --downloadS3 -b wluper-retrograph -f FILE -l LOCALPATH
 
 #Todo with EC2
-w_aws --start -i sunshine-1
+waws --start -i sunshine-1
 
-w_aws --connect -i sunshine-1
+waws --connect -i sunshine-1
 
-w_aws --list
+waws --list
 
-w_aws --docker_uploadEC2 -i sunshine-1 -f FOLDER -l LOCALPATH
+waws --docker_uploadEC2 -i sunshine-1 -f FOLDER -l LOCALPATH
 
-w_aws --docker_downloadEC2 -i sunshine-1 -f FOLDER -l LOCALPATH
+waws --docker_downloadEC2 -i sunshine-1 -f FOLDER -l LOCALPATH
 
 
-w_aws --docker_attach
+waws --docker_attach
 
-w_aws --docker_list
+waws --docker_list
 ```
 
 ### General parameters:
 ```bash
-w_aws -i INSTANCE_NAME -f FILE_NAME  -l LOCAL_PATH  -r REMOTE_PATH  -b BUCKET_NAME
+waws -i INSTANCE_NAME -f FILE_NAME  -l LOCAL_PATH  -r REMOTE_PATH  -b BUCKET_NAME
 ```
 
 <!-- EOF -->
