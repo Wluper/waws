@@ -42,7 +42,7 @@ class InstanceManager(object):
         # setting up authentication
         self._set_key_and_user()
         instance = self.get_instance_name(instance)
-        instance_host = self.EC2.get_dns(instance)
+        instance_host = self.get_dns(instance)
 
         #local full path
         file = os.path.join( local_path, folder_file_name )
@@ -59,8 +59,8 @@ class InstanceManager(object):
 
         # setting up authentication
         self._set_key_and_user()
-        instance = self.EC2.get_instance_name(instance)
-        instance_host = self.EC2.get_dns(instance)
+        instance = self.get_instance_name(instance)
+        instance_host = self.get_dns(instance)
 
         #remote full path
         target_folder_file = folder_file_name
