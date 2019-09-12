@@ -3,3 +3,5 @@ __pycache__
 waws.egg-info
 wluper_aws.egg-info
 deploy_pypi.sh
+build
+dist
