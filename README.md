@@ -79,8 +79,6 @@ w_aws --docker_downloadEC2 -i flower-power-1 -f FOLDER -l LOCALPATH
 
 w_aws --docker_attach
 
-w_aws --docker_attach
-
 w_aws --docker_list
 ```
 
