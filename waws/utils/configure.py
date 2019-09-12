@@ -12,9 +12,9 @@ from enum import Enum
 # DEFAULTS
 ##########################
 CONFIG_TEMPLATE = {
-    "KEY_PATH": os.path.expanduser("~/.ssh/aws_instances"),
+    "KEY_PATH": os.path.expanduser("~/.ssh/wluper"),
     "USER": "",
-    "AWS_REGION": "eu-london-1",
+    "AWS_REGION": "eu-west-2",
     "AWS_ENCODING": "json",
     "AWS_KEY_ID": "",
     "AWS_KEY": ""
