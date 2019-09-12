@@ -13,7 +13,7 @@ pip3 install waws
 After the installation you need to configure:
 
 ```bash
-w_aws --configure
+waws --configure
 ```
 
 
@@ -23,7 +23,7 @@ w_aws --configure
 
 #### Uploading and Downloading
 ```python
-import waws
+import wluper_aws as waws
 
 s3 = waws.BucketManager()
 
@@ -49,7 +49,7 @@ s3.download_file(
 
 #### Uploading and Downloading
 ```python
-import waws
+import wluper_aws as waws
 
 inst = waws.InstanceManager()
 
@@ -67,15 +67,22 @@ w_aws --help
 
 ### Useful functions:
 ```bash
-w_aws --start -i flower-power-1
+# Todo with S3
+w_aws --uploadS3 -b wluper-retrograph -f FILE -l LOCALPATH
 
-w_aws --connect -i flower-power-1
+w_aws --downloadS3 -b wluper-retrograph -f FILE -l LOCALPATH
+
+#Todo with EC2
+w_aws --start -i sunshine-1
+
+w_aws --connect -i sunshine-1
 
 w_aws --list
 
-w_aws --docker_uploadEC2 -i flower-power-1 -f FOLDER -l LOCALPATH
+w_aws --docker_uploadEC2 -i sunshine-1 -f FOLDER -l LOCALPATH
 
-w_aws --docker_downloadEC2 -i flower-power-1 -f FOLDER -l LOCALPATH
+w_aws --docker_downloadEC2 -i sunshine-1 -f FOLDER -l LOCALPATH
+
 
 w_aws --docker_attach
 
