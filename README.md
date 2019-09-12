@@ -5,7 +5,7 @@ This is a minimal library for handling EC2 instances and uploading and downloadi
 ## Installation
 
 ```bash
-pip3 install wluper-aws
+pip3 install waws
 ```
 
 ### CONFIGURATION
@@ -23,7 +23,7 @@ waws --configure
 
 #### Uploading and Downloading
 ```python
-import wluper_aws as waws
+import waws
 
 s3 = waws.BucketManager()
 
@@ -49,13 +49,13 @@ s3.download_file(
 
 #### Uploading and Downloading
 ```python
-import wluper_aws as waws
+import waws
 
 inst = waws.InstanceManager()
 
-inst.upload_to_EC2(folder_file_name="CODE_FOLDER", local_path="./training", optionalRemotePath="EXPERIMENT2", instance="flower-power-1")
+inst.upload_to_EC2(folder_file_name="CODE_FOLDER", local_path="./training", optionalRemotePath="EXPERIMENT2", instance="sunshine-1")
 
-inst.download_from_EC2(folder_file_name="CODE_FOLDER", local_path="./training", optional_remote_path="EXPERIMENT2", instance="flower-power-1")
+inst.download_from_EC2(folder_file_name="CODE_FOLDER", local_path="./training", optional_remote_path="EXPERIMENT2", instance="sunshine-1")
 ```
 
 ## Running as CLI
