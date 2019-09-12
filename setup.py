@@ -29,7 +29,6 @@ setup(
     # Requirements
     #
       install_requires=[
-                        'awscli',
                         'boto3',
                         'tqdm'
                         ]
