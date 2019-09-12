@@ -188,8 +188,9 @@ if args.uploadS3:
     try:
         s3.upload_file(
             bucket_name=args.bucket,
-            folder_name=args.file_name,
+            file_name=args.file_name,
             local_path=args.local_path,
+            remote_path=args.remote_path,
         )
 
     except Exception as e:
@@ -201,8 +202,9 @@ if args.downloadS3:
     try:
         s3.download_file(
             bucket_name=args.bucket,
-            folder_name=args.file_name,
+            file_name=args.file_name,
             local_path=args.local_path,
+            remote_path=args.remote_path,
         )
 
     except Exception as e:
