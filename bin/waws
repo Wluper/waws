@@ -20,7 +20,7 @@ import waws
 ##########################
 # Code
 ##########################
-DEFAULT_DOCKER = "AWESOME_DOCKER"
+DEFAULT_DOCKER = "awesome_docker"
 
 
 ##########################
