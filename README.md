@@ -85,8 +85,6 @@ waws --docker_downloadEC2 -i sunshine-1 -f FOLDER -l LOCALPATH
 
 
 waws --docker_attach
-
-waws --docker_list
 ```
 
 ### General parameters:
