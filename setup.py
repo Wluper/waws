@@ -11,7 +11,7 @@ setup(
     # SETUP
     #
       name          ='waws',
-      version       ='0.0.0.2',
+      version       ='0.0.0.3',
       description   ='Minimal AWS EC2/S3 wrapper by Wluper',
       url           ='https://github.com/Wluper/waws',
       author        ='Nikolai Rozanov',
