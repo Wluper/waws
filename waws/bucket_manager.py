@@ -76,5 +76,14 @@ class BucketManager(object):
         bucket.download_file( final_remote_path, final_local_path )
         print( "Downloaded: {}".format(file_name) )
 
+    def list_files(
+        self,
+        bucket_name=DEFAULT_BUCKET
+        ):
+        """ Downloads object from S3. """
+        bucket = self.__s3.Bucket(bucket_name)
+        objects = bucket.objects.filter(Prefix="")
+        for obj in objects:
+            print( "Path: {}".format(obj.key) )
 
 # EOF

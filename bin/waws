@@ -92,7 +92,11 @@ parser.add_argument(
     default=False,
     help="Downloads file from an EC2 instance at remote_path or '~' to local_path or './'.\n[Required Params: -i -f]\n[Optional Params: -l -r]"
 )
-
+#############
+# EC2 Commands
+parser.add_argument(
+    "--listS3", action="store_true", default=False, help="Lists all files in S3 bucket.\n[Required Params: None]\n[Optional Params: -b]"
+)
 
 #############
 # EC2 Commands
@@ -205,6 +209,17 @@ if args.downloadS3:
             file_name=args.file_name,
             local_path=args.local_path,
             remote_path=args.remote_path,
+        )
+
+    except Exception as e:
+        print(e)
+        print("Download to S3 failed. Please check all parameters are correct. Otherwise, please report on Github.")
+
+if args.listS3:
+    s3 = waws.BucketManager()
+    try:
+        s3.list_files(
+            # bucket_name=args.bucket,
         )
 
     except Exception as e:
