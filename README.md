@@ -79,6 +79,8 @@ waws --connect -i sunshine-1
 
 waws --list
 
+waws --listS3
+
 waws --docker_uploadEC2 -i sunshine-1 -f FOLDER -l LOCALPATH
 
 waws --docker_downloadEC2 -i sunshine-1 -f FOLDER -l LOCALPATH
