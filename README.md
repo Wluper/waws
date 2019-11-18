@@ -1,3 +1,5 @@
+[![Wluper](https://wluper.com/content/themes/main/static/gfx/wluper_logo.png)](https://wluper.com/)     
+
 # WAWS
 
 This is a minimal library for handling EC2 instances and uploading and downloading files to S3.
